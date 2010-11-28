@@ -1,13 +1,13 @@
 require 'songbird'
 
 Songbird.with_db do |db|
-  count = 0
-  path = nil
-  db[:media_items].each do |row|
-    puts row.inspect
-    path = CGI.unescape(row[:content_url].slice(7..-1)) if row[:content_url] =~ /^file/
-    puts path if path
-    count += 1
-    break if count > 10
+  db[:resource_properties].each do |row|
+    if row[:property_id] == 3
+      array = [row[:obj_sortable]]
+      row[:obj_secondary_sortable].split("\037").each do |value|
+        array << value
+      end
+      puts array.inspect
+    end
   end
 end
