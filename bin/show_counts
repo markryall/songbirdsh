@@ -1,4 +1,5 @@
-require 'songbird'
+#!/usr/bin/env ruby
+$: << File.dirname(__FILE__)+'/../lib'
 
 Songbird.with_db do |db|
   db.tables.each do |table|
