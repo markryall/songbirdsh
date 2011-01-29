@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 $: << File.dirname(__FILE__)+'/../lib'
+require 'songbird'
 require 'yaml'
 
 id = ARGV.shift.to_i
