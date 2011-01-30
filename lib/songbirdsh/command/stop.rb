@@ -1,9 +1,9 @@
-require 'songbirdsh/player'
-
 class Songbirdsh::Command::Stop
-  include Songbirdsh::Player
+  def initialize player
+    @player = player
+  end
 
-  def execute
-    stop
+  def execute ignored=nil
+    @player.stop
   end
 end
