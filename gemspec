@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'songbirdsh'
-  spec.version = '0.0.1'
+  spec.version = '0.0.2'
   spec.summary = 'command line jukebox music player'
   spec.description = <<-EOF
 A command line jukebox music player that uses your songbird music player database
@@ -8,7 +8,7 @@ EOF
   spec.authors << 'Mark Ryall'
   spec.email = 'mark@ryall.name'
   spec.homepage = 'http://github.com/markryall/songbirdsh'
-  spec.files = Dir['lib/**/*'] + Dir['bin/*'] + ['README.rdoc', 'MIT-LICENSE', 'gemspec']
+  spec.files = Dir['lib/**/*'] + Dir['bin/*'] + ['README.rdoc', 'HISTORY.rdoc','MIT-LICENSE', 'gemspec']
   spec.executables << 'songbirdsh'
 
   spec.add_dependency 'splat', '~>0.1'
