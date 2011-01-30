@@ -18,15 +18,15 @@ class Songbirdsh::Cli
     library = Songbirdsh::Library.new
     player = Songbirdsh::Player.new library
     at_exit { player.stop }
-    @prompt_text = "sbsh > "
+    @prompt = "songbirdsh > "
     @commands = {
       'show' => Songbirdsh::Command::ShowProperties.new(library),
-      '+' => Songbirdsh::Command::Enqueue.new(library),
-      'start' => Songbirdsh::Command::Start.new(player),
-      'stop' => Songbirdsh::Command::Stop.new(player),
       'next' => Songbirdsh::Command::Restart.new(player),
       'reload' => Songbirdsh::Command::Reload.new(library),
-      'search' => Songbirdsh::Command::Search.new(library)
+      'search' => Songbirdsh::Command::Search.new(library),
+      '+' => Songbirdsh::Command::Enqueue.new(player),
+      'start' => Songbirdsh::Command::Start.new(player),
+      'stop' => Songbirdsh::Command::Stop.new(player)
     }
   end
 end
