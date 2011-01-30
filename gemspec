@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = 'songbirdsh'
-  spec.version = '0.0.2'
+  spec.version = '0.0.3'
   spec.summary = 'command line jukebox music player'
   spec.description = <<-EOF
 A command line jukebox music player that uses your songbird music player database
