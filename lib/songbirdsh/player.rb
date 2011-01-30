@@ -44,4 +44,9 @@ class Songbirdsh::Player
     Process.kill 'TERM', @pid 
     @pid = nil
   end
+
+  def restart
+    stop
+    start
+  end
 end

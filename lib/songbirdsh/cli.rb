@@ -7,6 +7,7 @@ require 'songbirdsh/command/enqueue'
 require 'songbirdsh/command/show_properties'
 require 'songbirdsh/command/start'
 require 'songbirdsh/command/stop'
+require 'songbirdsh/command/restart'
 
 class Songbirdsh::Cli
   include ShellShock::Context
@@ -20,7 +21,8 @@ class Songbirdsh::Cli
       'show' => Songbirdsh::Command::ShowProperties.new(library),
       '+' => Songbirdsh::Command::Enqueue.new(library),
       'start' => Songbirdsh::Command::Start.new(player),
-      'stop' => Songbirdsh::Command::Stop.new(player)
+      'stop' => Songbirdsh::Command::Stop.new(player),
+      'next' => Songbirdsh::Command::Restart.new(player)
     }
   end
 end
