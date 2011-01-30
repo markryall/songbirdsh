@@ -13,7 +13,7 @@ class Songbirdsh::Player
 
   def start
     if @pid
-      puts 'already started'
+      puts "Already started (pid #{@pid})"
       return
     end
     @pid = fork do
@@ -36,7 +36,7 @@ class Songbirdsh::Player
         end
       end
     end
-    puts "PID=#{@pid.inspect}"
+    puts "Started (pid #{@pid})"
   end
 
   def stop

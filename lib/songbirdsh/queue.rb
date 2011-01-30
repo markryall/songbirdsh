@@ -8,7 +8,8 @@ module Songbirdsh::Queue
   def dequeue
     file = Dir.glob('*.song').sort.first
     return nil unless file
-    id = YAML.load(File.read(file))[:media_item_id]
+    hash = YAML.load(File.read(file))
+    id = hash[:media_item_id] if hash
     FileUtils.rm file
     id
   end

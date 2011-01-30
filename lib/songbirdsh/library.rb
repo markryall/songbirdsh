@@ -21,7 +21,23 @@ class Songbirdsh::Library
     val
   end
 
+  def with_track id
+    with_db do |db|
+      db[:resource_properties].filter(:media_item_id=>id).each do |row|
+        yield to_track(row) if row[:property_id] == 3
+      end
+    end
+  end
+
   def reload
+    s = Time.now.to_i
+    @tracks = []
+    with_db do |db|
+      db[:resource_properties].each do |row|
+        @tracks << to_track(row) if row[:property_id] == 3
+      end
+    end
+    puts "reloaded db with #{@tracks.size} tracks in #{Time.now.to_i-s} seconds"
   end
 private
   def debug message
@@ -29,5 +45,17 @@ private
       puts message 
       gets
     end
+  end
+
+  def to_track row
+    rest = row[:obj_secondary_sortable].split("\037")
+    {
+      :id => row[:media_item_id],
+      :artist => row[:obj_sortable],
+      :album => rest.shift,
+      :disc => rest.shift.to_i,
+      :number => rest.shift.to_i,
+      :track => rest.shift
+    }
   end
 end
