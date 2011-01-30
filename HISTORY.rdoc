@@ -1,0 +1,13 @@
+= 0.0.2
+
+Enhanced search
+
+* Improved search (breaks string into terms and returns tracks with all terms)
+* Adds search results to clipboard to make it fast and easy to enqueue
+
+= 0.0.1
+
+Initial release
+
+* Plays tracks
+* Searches database (pretty unusable - searches by substring of 'artist album track')
