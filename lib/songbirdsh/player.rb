@@ -1,8 +1,8 @@
 require 'songbirdsh/queue'
-require 'splat'
 require 'cgi'
 require 'yaml'
 require 'fileutils'
+require 'splat'
 
 class Songbirdsh::Player
   include Songbirdsh::Queue
@@ -29,8 +29,8 @@ class Songbirdsh::Player
         if row
           path = CGI.unescape(row[:content_url].slice(7..-1)) if row[:content_url] =~ /^file/
           if path
-            puts "playing: \"#{path}\""
-            player_pid = spawn "afplay \"#{path}\""
+            puts "playing #{id}: \"#{path}\""
+            player_pid = path.to_player
             Process.wait player_pid
           end
         end
