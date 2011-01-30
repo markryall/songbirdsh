@@ -13,9 +13,10 @@ module Songbirdsh
 
     db = Sequel.sqlite db_path
     begin
-      yield db
+      val = yield db
     ensure
       db.disconnect
     end
+    val
   end
 end

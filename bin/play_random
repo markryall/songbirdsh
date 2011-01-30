@@ -2,11 +2,13 @@
 
 $: << File.dirname(__FILE__)+'/../lib'
 
-require 'songbird'
+require 'songbirdsh'
 require 'splat'
 require 'cgi'
 require 'yaml'
 require 'fileutils'
+
+include Songbirdsh
 
 def next_id total_tracks
   file = Dir.glob('*.song').sort.first
@@ -18,7 +20,7 @@ def next_id total_tracks
   id 
 end
 
-Songbird.with_db do |db|
+with_db do |db|
   total_tracks = db[:media_items].count
   loop do
     id= next_id(total_tracks)
