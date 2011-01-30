@@ -35,6 +35,8 @@ If readline was correctly installed, you should find that tab completion works f
 
 = Future plans for world domination
 
-* Add some color
+* Add documentation for all commands
 * Improve search
+* Add music progress indicator
+* Add some color
 * Get working on linux and windows
