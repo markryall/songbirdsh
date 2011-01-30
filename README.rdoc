@@ -1,0 +1,40 @@
+= Songbird 
+
+This is a command line shell for queuing music tracks.
+
+It relies on you having a songbird database that has all of your tracks imported.
+
+This is eventually supposed to be platform independent but at this stage will probably only work on mac os x.
+
+= Usage
+
+Here you sit expectantly in front of a computer at the command line.
+
+== Install
+
+    gem install songbirdsh
+
+== Launch
+
+    songbirdsh
+
+== Commands
+
+If readline was correctly installed, you should find that tab completion works for all of the commands.
+
+* ? <command>    - show commands/help for command
+* help <command> - show commands/help for command
+* + <id>         - enqueue track with id
+* next           - skip currently playing track
+* start          - start music player
+* stop           - stop music player
+* reload         - reload track information (required for search)
+* search <text>  - search in memory list of tracks (see reload)
+* exit           - exit
+* quit           - exit
+
+= Future plans for world domination
+
+* Add some color
+* Improve search
+* Get working on linux and windows
