@@ -9,6 +9,7 @@ require 'songbirdsh/command/start'
 require 'songbirdsh/command/reload'
 require 'songbirdsh/command/stop'
 require 'songbirdsh/command/restart'
+require 'songbirdsh/command/search'
 
 class Songbirdsh::Cli
   include ShellShock::Context
@@ -24,7 +25,8 @@ class Songbirdsh::Cli
       'start' => Songbirdsh::Command::Start.new(player),
       'stop' => Songbirdsh::Command::Stop.new(player),
       'next' => Songbirdsh::Command::Restart.new(player),
-      'reload' => Songbirdsh::Command::Reload.new(library)
+      'reload' => Songbirdsh::Command::Reload.new(library),
+      'search' => Songbirdsh::Command::Search.new(library)
     }
   end
 end

@@ -1,4 +1,6 @@
 class Songbirdsh::Library
+  attr_reader :tracks
+
   def initialize
     home = File.expand_path '~'
     debug "Home Directory is \"#{home}\""
@@ -49,7 +51,7 @@ private
 
   def to_track row
     rest = row[:obj_secondary_sortable].split("\037")
-    {
+    track = {
       :id => row[:media_item_id],
       :artist => row[:obj_sortable],
       :album => rest.shift,
@@ -57,5 +59,8 @@ private
       :number => rest.shift.to_i,
       :track => rest.shift
     }
+    track[:search_string] = track[:artist]+track[:album]+track[:track]
+    track[:display] = "#{track[:id]}: #{track[:artist]} #{track[:album]} #{track[:number]} #{track[:track]}"
+    track
   end
 end
