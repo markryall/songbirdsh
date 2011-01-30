@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 $: << File.dirname(__FILE__)+'/../lib'
+require 'songbird'
 
 Songbird.with_db do |db|
   db[:properties].each do |row|
