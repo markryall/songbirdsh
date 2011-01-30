@@ -5,7 +5,7 @@ require 'yaml'
 require 'fileutils'
 
 module Songbirdsh::Player
-  include Queue
+  include Songbirdsh::Queue
 
   PID_FILE = 'player.pid'
 

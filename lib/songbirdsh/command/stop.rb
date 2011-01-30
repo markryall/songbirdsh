@@ -1,7 +1,7 @@
 require 'songbirdsh/player'
 
 class Songbirdsh::Command::Stop
-  include Player
+  include Songbirdsh::Player
 
   def execute
     stop
