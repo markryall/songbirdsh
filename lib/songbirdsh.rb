@@ -1,8 +1,11 @@
 require 'rubygems'
 require 'sequel'
 
-module Songbird
-  def self.with_db
+module Songbirdsh
+  module Command
+  end
+
+  def with_db
     home = File.expand_path '~'
     profiles = "#{home}/Library/Application Support/Songbird2/Profiles"
     profile = "e6rg7czm.default"
