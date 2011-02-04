@@ -1,5 +1,8 @@
-Gem::Specification.load('gemspec').dependencies.each { |dep| gem dep.name, dep.requirement }
-require 'gemesis/rake'
+begin
+  require 'gemesis/rake'
+rescue Exception
+  puts "gemesis related tasks will only be available if you 'gem install gemesis'"
+end
 
 desc 'execute specifications'
 task :test do

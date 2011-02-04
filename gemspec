@@ -8,7 +8,7 @@ EOF
   spec.authors << 'Mark Ryall'
   spec.email = 'mark@ryall.name'
   spec.homepage = 'http://github.com/markryall/songbirdsh'
-  spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'HISTORY.rdoc','MIT-LICENSE', 'gemspec', '.gemtest', 'Rakefile']
+  spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'HISTORY.rdoc','MIT-LICENSE', '.gemtest', 'Rakefile']
   spec.executables << 'songbirdsh'
 
   spec.add_dependency 'splat', '~>0'
@@ -18,7 +18,5 @@ EOF
   spec.add_dependency 'sqlite3', '~> 1'
 
   spec.add_development_dependency 'rake', '~>0.8'
-  spec.add_development_dependency 'gemesis', '~>0'
-  spec.add_development_dependency 'rubygems-test', '~>0.3'
   spec.add_development_dependency 'rspec', '~>2'
 end
