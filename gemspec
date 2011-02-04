@@ -8,15 +8,17 @@ EOF
   spec.authors << 'Mark Ryall'
   spec.email = 'mark@ryall.name'
   spec.homepage = 'http://github.com/markryall/songbirdsh'
-  spec.files = Dir['lib/**/*'] + Dir['bin/*'] + ['README.rdoc', 'HISTORY.rdoc','MIT-LICENSE', 'gemspec']
+  spec.files = Dir['lib/**/*'] + Dir['spec/**/*'] + Dir['bin/*'] + ['README.rdoc', 'HISTORY.rdoc','MIT-LICENSE', 'gemspec', '.gemtest', 'Rakefile']
   spec.executables << 'songbirdsh'
 
-  spec.add_dependency 'splat', '~>0.1'
-  spec.add_dependency 'shell_shock', '~>0.0.5'
+  spec.add_dependency 'splat', '~>0'
+  spec.add_dependency 'shell_shock', '~>0'
   spec.add_dependency 'sequel', '~> 3'
   spec.add_dependency 'splat', '~> 0.1'
   spec.add_dependency 'sqlite3', '~> 1'
 
-  spec.add_development_dependency 'rake', '~>0.8.7'
-  spec.add_development_dependency 'gemesis', '~>0.0.4'
+  spec.add_development_dependency 'rake', '~>0.8'
+  spec.add_development_dependency 'gemesis', '~>0'
+  spec.add_development_dependency 'rubygems-test', '~>0.3'
+  spec.add_development_dependency 'rspec', '~>2'
 end

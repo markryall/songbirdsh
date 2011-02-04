@@ -1,4 +1,5 @@
 require 'yaml'
+require 'songbirdsh/command'
 
 class Songbirdsh::Command::Enqueue
   def initialize player
@@ -6,6 +7,6 @@ class Songbirdsh::Command::Enqueue
   end
 
   def execute text
-    text.split(/\W/).each {|id| @player.enqueue id }
+    text.split(/\D/).select {|s| s and !s.empty?}.each {|id| @player.enqueue id }
   end
 end
