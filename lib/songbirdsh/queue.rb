@@ -2,7 +2,7 @@ module Songbirdsh
   module Queue
     def enqueue id
       @library.with_db do |db|
-        File.open("#{Time.now.to_i}-#{id}.song", 'w') {|f| f.print db[:media_items][:media_item_id=>id].to_yaml }
+        File.open("#{Time.now.to_i}-#{id.to_s.rjust(8,'0')}.song", 'w') {|f| f.print db[:media_items][:media_item_id=>id].to_yaml }
       end
     end
 

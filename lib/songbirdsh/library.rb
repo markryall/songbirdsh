@@ -22,8 +22,8 @@ class Songbirdsh::Library
     loop do
       choices.each {|choice| puts "* #{choice}"}
       print "please enter your preferred songbird profile > "
-      choice = gets.chomp
-      return choice if choices.include? choice
+      subset = choices.grep(/#{gets.chomp}/)
+      return subset.first if subset.size == 1
       puts 'invalid choice - please enter the full name of the profile'
     end
   end
@@ -67,7 +67,7 @@ private
   def to_track row
     rest = row[:obj_secondary_sortable].split("\037")
     track = {
-      :id => row[:media_item_id],
+      :id => row[:media_item_id].to_s(36),
       :artist => row[:obj_sortable],
       :album => rest.shift,
       :disc => rest.shift.to_i,

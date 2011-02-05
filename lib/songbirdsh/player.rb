@@ -30,14 +30,18 @@ module Songbirdsh
         loop do
           id = dequeue || (rand * total_tracks).to_i
           row = @library.with_db {|db| db[:media_items][:media_item_id=>id] }
-          if row
-            path = CGI.unescape(row[:content_url].slice(7..-1)) if row[:content_url] =~ /^file/
-            if path
-              puts "playing #{id}: \"#{path}\""
-              player_pid = path.to_player
-              Process.wait player_pid
-            end
+          unless row
+            puts "track with id #{id} did not exist"
+            next
           end
+          path = CGI.unescape(row[:content_url].slice(7..-1)) if row[:content_url] =~ /^file/
+          unless path and File.exist? path
+            puts "track with id #{id} did not refer to a file"
+            next
+          end
+          puts "playing #{id.to_s(32)}: \"#{path}\""
+          player_pid = path.to_player
+          Process.wait player_pid
         end
       end
       puts "Started (pid #{@pid})"
