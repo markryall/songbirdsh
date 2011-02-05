@@ -2,10 +2,10 @@ require File.dirname(__FILE__)+'/../../spec_helper'
 require 'songbirdsh/command/enqueue'
 
 describe Songbirdsh::Command::Enqueue do
-  include ShellShock::CommandSpec
+  extend ShellShock::CommandSpec
 
-  with_usage ''
-  with_help ''
+  with_usage '*<id>'
+  with_help 'enqueues the list of songs with the specified ids'
 
   before do
     @player = stub('player')
