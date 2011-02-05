@@ -9,10 +9,23 @@ class Songbirdsh::Library
     songbird_home = "#{home}/Library/Application Support/Songbird2"
     debug "Songbird home is \"#{songbird_home}\""
     profiles = "#{songbird_home}/Profiles"
-    profile = `ls \"#{profiles}\"`.chomp
+    profile = choose_profile profiles
     debug "found profile \"#{profile}\""
     @db_path = "#{profiles}/#{profile}/db/main@library.songbirdnest.com.db"
     debug "using db \"#{@db_path}\""
+  end
+  
+  def choose_profile path
+    choices = Dir.entries(path).select {|path| !['.','..'].include?(path) }
+    raise 'no profiles found' if choices.empty?
+    return choices.first if choices.size == 1
+    loop do
+      choices.each {|choice| puts "* #{choice}"}
+      print "please enter your preferred songbird profile > "
+      choice = gets.chomp
+      return choice if choices.include? choice
+      puts 'invalid choice - please enter the full name of the profile'
+    end
   end
 
   def with_db
