@@ -39,7 +39,7 @@ module Songbirdsh
             puts "track with id #{id} did not refer to a file"
             next
           end
-          puts "playing #{id.to_s(32)}: \"#{path}\""
+          puts "playing #{id.to_s(36)}: \"#{path}\""
           player_pid = path.to_player
           Process.wait player_pid
         end
