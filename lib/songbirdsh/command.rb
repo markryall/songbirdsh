@@ -1,12 +1,9 @@
 module Songbirdsh
   module Command
-    def classify name
-      name.to_s.split('_').map{|s|s.capitalize}.join
-    end
-
-    def load_command name, *args
+    def self.load name, *args
       require "songbirdsh/command/#{name}"
-      Songbirdsh::Command.const_get(classify(name)).new *args
+      classname = name.to_s.split('_').map{|s|s.capitalize}.join
+      Songbirdsh::Command.const_get(classname).new *args
     end
   end
 end

@@ -1,27 +1,27 @@
 require 'shell_shock/context'
 
-require 'songbirdsh'
 require 'songbirdsh/player'
 require 'songbirdsh/library'
 require 'songbirdsh/command'
 
-class Songbirdsh::Cli
-  include ShellShock::Context
-  include Songbirdsh::Command
+module Songbirdsh
+  class Cli
+    include ShellShock::Context
 
-  def initialize
-    library = Songbirdsh::Library.new
-    player = Songbirdsh::Player.new library
-    at_exit { player.stop }
-    @prompt = "songbirdsh > "
-    @commands = {
-      'show'   => load_command(:show_properties, library),
-      'next'   => load_command(:restart, player),
-      'reload' => load_command(:reload, library),
-      'search' => load_command(:search, library),
-      '+'      => load_command(:enqueue, player),
-      'start'  => load_command(:start, player),
-      'stop'   => load_command(:stop, player)
-    }
+    def initialize
+      library = Library.new
+      player = Player.new library
+      at_exit { player.stop }
+      @prompt = "songbirdsh > "
+      @commands = {
+        'show'   => Command.load(:show_properties, library),
+        'next'   => Command.load(:restart, player),
+        'reload' => Command.load(:reload, library),
+        'search' => Command.load(:search, library),
+        '+'      => Command.load(:enqueue, player),
+        'start'  => Command.load(:start, player),
+        'stop'   => Command.load(:stop, player)
+      }
+    end
   end
 end
