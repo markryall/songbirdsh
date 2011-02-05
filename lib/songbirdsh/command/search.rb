@@ -1,13 +1,11 @@
-class Songbirdsh::Command::Search
-  def initialize library
-    @library = library
-  end
+require 'songbirdsh/command'
 
+class Songbirdsh::Command::Search < Songbirdsh::Command
   def execute text
     terms = text.split(/\W/)
     matches = []
-    @library.reload unless @library.tracks
-    @library.tracks.each do |track|
+    @player.library.reload unless @player.library.tracks
+    @player.library.tracks.each do |track|
       if terms.all? {|term| track[:search_string].include? term }
         puts track[:display]
         matches << track[:id]

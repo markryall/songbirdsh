@@ -1,9 +1,7 @@
-class Songbirdsh::Command::Reload
-  def initialize library
-    @library = library
-  end
+require 'songbirdsh/command'
 
+class Songbirdsh::Command::Reload < Songbirdsh::Command
   def execute ignored=nil
-    @library.reload
+    @player.library.reload
   end
 end

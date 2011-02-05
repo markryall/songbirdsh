@@ -2,6 +2,11 @@ require File.dirname(__FILE__)+'/../../spec_helper'
 require 'songbirdsh/command/enqueue'
 
 describe Songbirdsh::Command::Enqueue do
+  include ShellShock::CommandSpec
+
+  with_usage ''
+  with_help ''
+
   before do
     @player = stub('player')
     @command = Songbirdsh::Command::Enqueue.new @player

@@ -1,3 +1,5 @@
+require 'sequel'
+
 class Songbirdsh::Library
   attr_reader :tracks
 

@@ -1,8 +1,6 @@
-class Songbirdsh::Command::Restart
-  def initialize player
-    @player = player
-  end
+require 'songbirdsh/command'
 
+class Songbirdsh::Command::Restart < Songbirdsh::Command
   def execute ignored=nil
     @player.restart
   end
