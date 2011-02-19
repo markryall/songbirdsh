@@ -11,6 +11,7 @@ module Songbirdsh
     include ShellShock::Context
 
     def with name, *aliases
+      aliases << name.to_s if aliases.empty?
       add_command Command.load(name, @player), *aliases
     end
 
@@ -21,12 +22,13 @@ module Songbirdsh
       @prompt = "songbirdsh > "
       with :show_properties, 'show'
       with :restart, 'next'
-      with :reload, 'reload'
-      with :search, 'search'
+      with :reload
+      with :search
       with :enqueue, '+'
-      with :start, 'start'
-      with :stop, 'stop'
-      with :scrobbling, 'scrobbling'
+      with :start
+      with :stop
+      with :scrobbling
+      with :shuffle
     end
   end
 end
