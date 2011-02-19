@@ -12,9 +12,11 @@ module Songbirdsh
   class Player
     include Queue
     attr_reader :library
+    attr_accessor :scrobbling
 
     def initialize preferences
       @scrobbler = Scrobbler.new preferences['lastfm']
+      @scrobbling = true
       @library = Library.new preferences
     end
 
@@ -44,12 +46,12 @@ module Songbirdsh
           end
           @library.with_track(id) do |track|
             puts "playing #{id.to_s(36)}: \"#{path}\""
-            @scrobbler.update track
+            @scrobbler.update track if @scrobbling
           end
           player_pid = path.to_player
           Process.wait player_pid
           @library.with_track(id) do |track|
-            @scrobbler.scrobble track
+            @scrobbler.scrobble track if @scrobbling
           end
         end
       end

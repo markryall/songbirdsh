@@ -24,9 +24,9 @@ module Songbirdsh
       with :reload, 'reload'
       with :search, 'search'
       with :enqueue, '+'
-      with :enqueue, '+'
       with :start, 'start'
       with :stop, 'stop'
+      with :scrobbling, 'scrobbling'
     end
   end
 end
