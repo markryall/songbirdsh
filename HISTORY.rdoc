@@ -1,7 +1,11 @@
 = 0.0.3
 
+Introduced testing and lastfm support
+
 * Started adding specifications
 * Added rubygems-test and various other development dependencies
+* added lastfm support
+* added randomisation of search results
 
 = 0.0.2
 
