@@ -13,14 +13,14 @@ describe Songbirdsh::Command::Enqueue do
   end
 
   it 'should enqueue a single track' do
-    @player.should_receive(:enqueue).with('123')
+    @player.should_receive(:enqueue).with(1371)
     @command.execute '123'
   end
 
   it 'should enqueue multiple tracks separated by any non digit' do
-    %w{123 456 789}.each do |id|
-      @player.should_receive(:enqueue).with(id)
+    %w{1371 5370 9369}.each do |id|
+      @player.should_receive(:enqueue).with(id.to_i)
     end
-    @command.execute "123 \tds 456  , 789 dd"
+    @command.execute "123 \t 456  , 789 "
   end
 end
