@@ -24,7 +24,7 @@ module Songbirdsh
       @player = Player.new preferences
       at_exit { @player.stop }
       @prompt = "songbirdsh > "
-      with :status, ''
+      with :status, "'"
       with :show_properties, 'show'
       with :restart, 'next'
       with :enqueue, '+'
