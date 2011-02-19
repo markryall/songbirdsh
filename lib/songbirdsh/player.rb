@@ -11,8 +11,8 @@ module Songbirdsh
     include Queue
     attr_reader :library
 
-    def initialize
-      @library=Library.new
+    def initialize preferences
+      @library = Library.new preferences
     end
 
     def start

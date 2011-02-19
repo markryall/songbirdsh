@@ -3,18 +3,18 @@ require 'sequel'
 class Songbirdsh::Library
   attr_reader :tracks
 
-  def initialize
+  def initialize preferences
     home = File.expand_path '~'
     debug "Home Directory is \"#{home}\""
     songbird_home = "#{home}/Library/Application Support/Songbird2"
     debug "Songbird home is \"#{songbird_home}\""
     profiles = "#{songbird_home}/Profiles"
-    profile = choose_profile profiles
-    debug "found profile \"#{profile}\""
-    @db_path = "#{profiles}/#{profile}/db/main@library.songbirdnest.com.db"
+    preferences['profile'] ||= choose_profile profiles
+    debug "found profile \"#{preferences['profile']}\""
+    @db_path = "#{profiles}/#{preferences['profile']}/db/main@library.songbirdnest.com.db"
     debug "using db \"#{@db_path}\""
   end
-  
+
   def choose_profile path
     choices = Dir.entries(path).select {|path| !['.','..'].include?(path) }
     raise 'no profiles found' if choices.empty?

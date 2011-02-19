@@ -1,7 +1,10 @@
 require 'shell_shock/context'
 
 require 'songbirdsh/player'
+require 'songbirdsh/preferences'
 require 'songbirdsh/command'
+
+require 'yaml'
 
 module Songbirdsh
   class Cli
@@ -12,7 +15,8 @@ module Songbirdsh
     end
 
     def initialize
-      @player = Player.new
+      preferences = Preferences.new
+      @player = Player.new preferences
       at_exit { @player.stop }
       @prompt = "songbirdsh > "
       with :show_properties, 'show'
