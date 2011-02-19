@@ -8,6 +8,12 @@ module Songbirdsh
       end
     end
 
+    def each
+      Dir.glob('*.song').sort.each do |file|
+        yield YAML.load File.read(file)
+      end
+    end
+
     def dequeue
       file = Dir.glob('*.song').sort.first
       return nil unless file

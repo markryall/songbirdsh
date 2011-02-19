@@ -29,6 +29,7 @@ module Songbirdsh
       with :stop
       with :scrobbling
       with :shuffle
+      with :list
     end
   end
 end
