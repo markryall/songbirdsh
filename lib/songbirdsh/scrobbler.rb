@@ -9,8 +9,8 @@ module Songbirdsh
     def scrobble track
       return unless @scrobbler
       puts "Scrobbling to last fm: #{track.inspect}"
-      @scrobbler.submit track[:track],
-        track[:artist],
+      @scrobbler.submit track[:artist],
+        track[:track],
         :length => track[:duration],
         :album => track[:album],
         :track_number => track[:number]
@@ -19,8 +19,8 @@ module Songbirdsh
     def update track
       return unless @scrobbler
       puts "Updating now listening with last fm: #{track.inspect}"
-      @scrobbler.now_playing track[:track],
-        track[:artist],
+      @scrobbler.now_playing track[:artist],
+        track[:track],
         :length => track[:duration],
         :album => track[:album],
         :track_number => track[:number]
