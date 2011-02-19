@@ -39,7 +39,7 @@ class Songbirdsh::Library
   end
 
   def with_track id
-    track = {}
+    track = {:id => id}
     with_db do |db|
       db[:resource_properties].filter(:media_item_id=>id).each do |row|
         append_to_track track, row
@@ -56,7 +56,7 @@ class Songbirdsh::Library
       db[:resource_properties].order(:media_item_id).each do |row|
         unless row[:media_item_id] == current_media_item_id
           append current_track
-          current_track = {:id => row[:media_item_id]}
+          current_track = {:id => row[:media_item_id], :search_id => row[:media_item_id].to_s(36)}
           debug "Created new track with id #{current_track[:id]}"
           current_media_item_id = row[:media_item_id]
         end
@@ -73,7 +73,7 @@ private
       return
     end
     track[:search_string] = "#{track[:artist]}#{track[:album]}#{track[:track]}"
-    track[:display] = "#{track[:id]}: #{track[:artist]} - #{track[:album]} - #{track[:number]} #{track[:track]} (#{track[:duration]})"
+    track[:display] = "#{track[:search_id]}: #{track[:artist]} - #{track[:album]} - #{track[:number]} #{track[:track]} (#{track[:duration]})"
     @tracks << track
     debug "Appended #{track.inspect}"
     debug "Now up to #{@tracks.size} tracks"

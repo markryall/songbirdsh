@@ -1,8 +1,8 @@
 module Songbirdsh
   module Queue
     def enqueue id
-      @library.with_db do |db|
-        File.open("#{Time.now.to_i}-#{id.to_s.rjust(8,'0')}.song", 'w') {|f| f.print db[:media_items][:media_item_id=>id].to_yaml }
+      @library.with_track id do |track|
+        File.open("#{Time.now.to_i}-#{id.to_s.rjust(8,'0')}.song", 'w') {|f| f.print track.to_yaml }
       end
     end
 
@@ -10,7 +10,7 @@ module Songbirdsh
       file = Dir.glob('*.song').sort.first
       return nil unless file
       hash = YAML.load(File.read(file))
-      id = hash[:media_item_id] if hash
+      id = hash[:id] if hash
       FileUtils.rm file
       id
     end

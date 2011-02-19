@@ -8,7 +8,7 @@ class Songbirdsh::Command::Search < Songbirdsh::Command
     @player.library.tracks.each do |track|
       if terms.all? {|term| track[:search_string].include? term }
         puts track[:display]
-        matches << track[:id]
+        matches << track[:search_id]
       end
     end
     puts "Found #{matches.size} matches (ids have been placed on clipboard)"
