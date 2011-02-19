@@ -1,7 +1,9 @@
 require 'sequel'
 require 'songbirdsh/track'
+require 'songbirdsh/debug'
 
 class Songbirdsh::Library
+  include Songbirdsh::Debug
   attr_reader :tracks
 
   def initialize preferences
@@ -77,19 +79,6 @@ private
     debug "Appended #{track}"
     debug "Now up to #{@tracks.size} tracks"
     pause
-  end
-
-  def debug message
-    if ENV['DEBUG']
-      puts message 
-    end
-  end
-
-  def pause
-    if ENV['DEBUG']
-      puts "Hit enter to continue"
-      gets
-    end
   end
 
   def append_to_track track, row

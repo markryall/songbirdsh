@@ -2,7 +2,11 @@ require 'songbirdsh/command'
 
 class Songbirdsh::Command::Shuffle < Songbirdsh::Command
   def execute text
-    @player.matches.sort_by { rand }.join(' ').to_clipboard
+    if @player.matches
+      @player.matches.sort_by { rand }.join(' ').to_clipboard
+    else
+      puts 'nothing to shuffle - please search for some tracks'
+    end
   end
 
   def help

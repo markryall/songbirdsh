@@ -1,20 +1,23 @@
 require 'simple_scrobbler'
+require 'songbirdsh/debug'
 
 module Songbirdsh
   class Scrobbler
+    include Debug
+
     def initialize preferences
       @scrobbler = SimpleScrobbler.new *%w{api_key secret user session_key}.map{|k| preferences[k]}
     end
 
     def scrobble track
       return unless @scrobbler
-      puts "Scrobbling to last fm: #{track.inspect}"
+      debug "Scrobbling to last fm: #{track.inspect}"
       send_to_scrobbler :submit, track
     end
 
     def update track
       return unless @scrobbler
-      puts "Updating now listening with last fm: #{track.inspect}"
+      debug "Updating now listening with last fm: #{track.inspect}"
       send_to_scrobbler :now_playing, track
     end
 private

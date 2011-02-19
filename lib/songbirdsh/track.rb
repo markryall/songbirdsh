@@ -1,6 +1,6 @@
 module Songbirdsh
   class Track
-    attr_accessor *%w{id track album artist duration genre number year disc disc_total track_total label}
+    attr_accessor *%w{id track album artist duration genre number year disc disc_total track_total label started}
 
     def initialize id
       @id = id

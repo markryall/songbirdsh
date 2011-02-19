@@ -20,6 +20,26 @@ module Songbirdsh
       @library = Library.new preferences
     end
 
+    def status
+      if @pid
+        track = self.current
+        puts "Since #{Time.at(track.started)}\n\t#{track}"
+        played = Time.now.to_i-track.started
+        puts "#{played} seconds (#{track.duration-played} remaining)"
+      else
+        puts 'not playing'
+      end
+    end
+
+    def current 
+      YAML.load(File.read('current_song'))
+    end
+
+    def register track
+      track.started = Time.now.to_i
+      File.open('current_song', 'w') {|f| f.print track.to_yaml }
+    end
+
     def start
       if @pid
         puts "Already started (pid #{@pid})"
@@ -45,12 +65,10 @@ module Songbirdsh
             next
           end
           @library.with_track(id) do |track|
-            puts "playing #{id.to_s(36)}: \"#{path}\""
             @scrobbler.update track if @scrobbling
-          end
-          player_pid = path.to_player
-          Process.wait player_pid
-          @library.with_track(id) do |track|
+            register track
+            player_pid = path.to_player
+            Process.wait player_pid
             @scrobbler.scrobble track if @scrobbling
           end
         end
