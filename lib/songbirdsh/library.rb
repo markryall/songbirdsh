@@ -1,4 +1,5 @@
 require 'sequel'
+require 'songbirdsh/track'
 
 class Songbirdsh::Library
   attr_reader :tracks
@@ -39,7 +40,7 @@ class Songbirdsh::Library
   end
 
   def with_track id
-    track = {:id => id}
+    track = Songbirdsh::Track.new id
     with_db do |db|
       db[:resource_properties].filter(:media_item_id=>id).each do |row|
         append_to_track track, row
@@ -52,13 +53,13 @@ class Songbirdsh::Library
     s = Time.now.to_i
     @tracks = []
     with_db do |db|
-      current_media_item_id, current_track = nil, {}
+      current_media_item_id, current_track = nil, nil
       db[:resource_properties].order(:media_item_id).each do |row|
         unless row[:media_item_id] == current_media_item_id
           append current_track
-          current_track = {:id => row[:media_item_id], :search_id => row[:media_item_id].to_s(36)}
-          debug "Created new track with id #{current_track[:id]}"
-          current_media_item_id = row[:media_item_id]
+          current_track = Songbirdsh::Track.new row[:media_item_id]
+          debug "Created new track with id #{current_track.id}"
+          current_media_item_id = current_track.id
         end
         append_to_track current_track, row
       end
@@ -68,14 +69,12 @@ class Songbirdsh::Library
   end
 private
   def append track
-    unless track[:track]
+    unless track and track.valid?
       debug "Discarding #{track.inspect}"
       return
     end
-    track[:search_string] = "#{track[:artist]}#{track[:album]}#{track[:track]}"
-    track[:display] = "#{track[:search_id]}: #{track[:artist]} - #{track[:album]} - #{track[:number]} #{track[:track]} (#{track[:duration]})"
     @tracks << track
-    debug "Appended #{track.inspect}"
+    debug "Appended #{track}"
     debug "Now up to #{@tracks.size} tracks"
     pause
   end
@@ -96,33 +95,17 @@ private
   def append_to_track track, row
     debug row.inspect
     case row[:property_id]
-      when 1
-        set_field track, :track,        row[:obj_searchable]
-      when 2
-        set_field track, :album,       row[:obj_searchable]
-      when 3
-        set_field track, :artist,      row[:obj_searchable]
-      when 4
-        set_field track, :duration,    row[:obj].to_i/1000000
-      when 5
-        set_field track, :genre,       row[:obj_searchable]
-      when 6
-        set_field track, :number,       row[:obj].to_i
-      when 7
-        set_field track, :year,        row[:obj].to_i
-      when 8
-        set_field track, :disc,        row[:obj].to_i
-      when 9
-        set_field track, :disc_total,  row[:obj].to_i
-      when 10
-        set_field track, :track_total, row[:obj].to_i
-      when 23
-        set_field track, :label,       row[:obj_searchable]
+      when 1;  track.track       = row[:obj_searchable]
+      when 2;  track.album       = row[:obj_searchable]
+      when 3;  track.artist      = row[:obj_searchable]
+      when 4;  track.duration    = row[:obj].to_i/1000000
+      when 5;  track.genre       = row[:obj_searchable]
+      when 6;  track.number      = row[:obj].to_i
+      when 7;  track.year        = row[:obj].to_i
+      when 8;  track.disc        = row[:obj].to_i
+      when 9;  track.disc_total  = row[:obj].to_i
+      when 10; track.track_total = row[:obj].to_i
+      when 23; track.label       = row[:obj_searchable]
     end
-  end
-
-  def set_field track, field, value
-    debug "Setting #{field} to #{value} in track #{track[:id]}"
-    track[field] = value
   end
 end
