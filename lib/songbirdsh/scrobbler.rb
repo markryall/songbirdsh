@@ -9,19 +9,20 @@ module Songbirdsh
     def initialize preferences
       @preferences = preferences
       if preferences['lastfm']
-        @scrobbler = SimpleScrobbler.new *%w{api_key secret user session_key}.map{|k| [k]}
+        debug "Configuring scrobbler with #{preferences['lastfm'].inspect}"
+        @scrobbler = SimpleScrobbler.new *%w{api_key secret user session_key}.map{|k| preferences['lastfm'][k]}
       end
     end
 
     def scrobble track
       return unless @scrobbler
-      debug "Scrobbling to last fm: #{track.inspect}"
+      debug "Scrobbling to last fm: #{track}"
       send_to_scrobbler :submit, track
     end
 
     def update track
       return unless @scrobbler
-      debug "Updating now listening with last fm: #{track.inspect}"
+      debug "Updating now listening with last fm: #{track}"
       send_to_scrobbler :now_playing, track
     end
 
@@ -61,11 +62,12 @@ module Songbirdsh
 private
     def send_to_scrobbler message, track
       begin
-        @scrobbler.send message, track[:artist],
-          track[:track],
-          :length => track[:duration],
-          :album => track[:album],
-          :track_number => track[:number]
+        debug %w{artist track duration album number}.map {|k| "#{k}=#{track.send(k)}"}.join(',')
+        @scrobbler.send message, track.artist,
+          track.track,
+          :length => track.duration,
+          :album => track.album,
+          :track_number => track.number
       rescue Exception => e
         puts "Failed to scrobble: #{e}"
       end

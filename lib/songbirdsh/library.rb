@@ -82,7 +82,6 @@ private
   end
 
   def append_to_track track, row
-    debug row.inspect
     case row[:property_id]
       when 1;  track.track       = row[:obj_searchable]
       when 2;  track.album       = row[:obj_searchable]
