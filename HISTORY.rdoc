@@ -1,11 +1,12 @@
 = 0.0.3
 
-Introduced testing and lastfm support
+Introduced testing, lastfm support and a few other useful commands
 
 * Started adding specifications
 * Added rubygems-test and various other development dependencies
-* added lastfm support
+* added lastfm support - the setup_scrobbling and scrobble commands
 * added randomisation of search results
+* added a command to list the contents of the playing queue (with approximate times for when each track will play)
 
 = 0.0.2
 

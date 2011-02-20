@@ -22,21 +22,24 @@ Here you sit expectantly in front of a computer at the command line.
 
 If readline was correctly installed, you should find that tab completion works for all of the commands.
 
-* ? <command>    - show commands/help for command
-* help <command> - show commands/help for command
-* + <id>         - enqueue track with id
-* next           - skip currently playing track
-* start          - start music player
-* stop           - stop music player
-* reload         - reload track information (required for search)
-* search <text>  - search in memory list of tracks (see reload)
-* exit           - exit
-* quit           - exit
+* '                   - show current status (currently playing track)
+* + <id>              - enqueue track with id
+* ? <command>         - show commands/help for command
+* exit                - exit
+* help <command>      - show commands/help for command
+* list <filter>       - show current track queue
+* next                - skip currently playing track
+* quit                - exit
+* reload              - reload track information (required for search)
+* scrobbling <on|off> - turn lastfm scrobbling on or off (note that this will skip the current track)
+* search <filter>     - search for tracks (places ids on the clipboard for convenient pasting to +)
+* setup_scrobbling    - runs through a setup wizard for lastfm integration
+* show  <id>          - shows track details for the specified id
+* shuffle             - shuffles the list of tracks returned by the previous search
+* start               - start music player
+* stop                - stop music player
 
 = Future plans for world domination
 
-* Add documentation for all commands
-* Improve search
-* Add music progress indicator
-* Add some color
+* See cardigan cards
 * Get working on linux and windows
