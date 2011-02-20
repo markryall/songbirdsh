@@ -11,11 +11,11 @@ require 'songbirdsh/scrobbler'
 module Songbirdsh
   class Player
     include Queue
-    attr_reader :library
+    attr_reader :library, :scrobbler
     attr_accessor :scrobbling, :matches
 
     def initialize preferences
-      @scrobbler = Scrobbler.new preferences['lastfm']
+      @scrobbler = Scrobbler.new preferences
       @scrobbling = true
       @library = Library.new preferences
     end

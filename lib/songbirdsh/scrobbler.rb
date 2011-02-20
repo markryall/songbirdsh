@@ -1,3 +1,4 @@
+require 'splat'
 require 'simple_scrobbler'
 require 'songbirdsh/debug'
 
@@ -6,7 +7,10 @@ module Songbirdsh
     include Debug
 
     def initialize preferences
-      @scrobbler = SimpleScrobbler.new *%w{api_key secret user session_key}.map{|k| preferences[k]}
+      @preferences = preferences
+      if preferences['lastfm']
+        @scrobbler = SimpleScrobbler.new *%w{api_key secret user session_key}.map{|k| [k]}
+      end
     end
 
     def scrobble track
@@ -19,6 +23,40 @@ module Songbirdsh
       return unless @scrobbler
       debug "Updating now listening with last fm: #{track.inspect}"
       send_to_scrobbler :now_playing, track
+    end
+
+    def ask question
+      print question
+      gets.chomp
+    end
+
+    def setup
+      puts <<-EOF
+      Because of the way lastfm authentication works, setting up lastfm involves two steps:
+      Firstly, you need to register that you are developing an application. This will give you an api key and an associated 'secret'
+      Secondly, you need to gives your application access your lastfm account.  This will give a authenticated session.
+
+      Step 1. Logging in to your lastfm account and register an application
+      This will launch a browser.  You need to log in and fill out the API registration form
+      EOF
+      answer = ask 'Are you ready ? '
+      return unless answer.downcase.start_with? 'y'
+      "http://www.last.fm/api/account".to_launcher
+      preferences = {}
+      preferences['api_key'] = ask 'What is your API key ? '
+      preferences['secret'] = ask 'What is your secret ? '
+      puts <<-EOF
+      Now you've got you application details, you need to create an authentication session between your application and your lastfm account
+      Step 2. Authorising your application to access your lastfm account
+      This will launch another browser. You just need to give your application permission to access your account
+      EOF
+      preferences['user'] = ask 'What is your lastfm user name ? '
+      @scrobbler = SimpleScrobbler.new preferences['api_key'], preferences['secret'], preferences['user']
+      preferences['session_key'] = @scrobbler.fetch_session_key do |url|
+        url.to_launcher
+        ask 'Hit enter when you\'ve allowed your application access to your account'
+      end
+      @preferences['lastfm'] = preferences
     end
 private
     def send_to_scrobbler message, track
