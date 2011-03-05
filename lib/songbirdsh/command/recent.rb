@@ -13,7 +13,7 @@ class Songbirdsh::Command::Recent < Songbirdsh::Command
       if current_album==track.album
         tracks << track
       else
-        puts "#{current_album} - #{extract_artist tracks} - #{tracks.size} tracks" #(#{tracks.last.id} - #{tracks.first.id})"
+        puts "#{current_album} - #{extract_artist tracks} - #{tracks.size} tracks (#{tracks.last.search_id}-#{tracks.first.search_id})"
         current_album = track.album
         tracks = [track]
         total_count += 1
