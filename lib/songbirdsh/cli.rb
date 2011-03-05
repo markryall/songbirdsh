@@ -28,7 +28,7 @@ module Songbirdsh
       with :show_properties, 'show'
       with :restart, 'next'
       with :enqueue, '+'
-      with_all *%w{reload search start stop scrobbling shuffle list setup_scrobbling}
+      with_all *%w{reload search start stop scrobbling shuffle list setup_scrobbling recent}
     end
   end
 end
