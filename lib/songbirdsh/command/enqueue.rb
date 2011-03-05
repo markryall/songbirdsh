@@ -22,7 +22,9 @@ private
   end
 
   def range from, to
-    (to_number(from)..to_number(to)).to_a
+    f, t = to_number(from), to_number(to)
+    t = to_number(from.slice(0...from.size-to.size)+to) if t < f
+    (f..t).to_a
   end
 
   def to_number term

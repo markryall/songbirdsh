@@ -33,4 +33,12 @@ describe Songbirdsh::Command::Enqueue do
     end
     @command.execute " 456-45i "
   end
+
+  it 'should enqueue an abbreviated range of tracks' do
+    values = (5370..5382).to_a
+    values.each do |id|
+      @player.should_receive(:enqueue).with id
+    end
+    @command.execute " 456-i "
+  end
 end
