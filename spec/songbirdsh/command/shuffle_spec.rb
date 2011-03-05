@@ -16,7 +16,7 @@ describe Songbirdsh::Command::Shuffle do
 
   it 'should report warning if there are no arguments and there are no matches' do
     @player.should_receive(:matches).and_return nil
-    @expander.should_receive(:expand).with('').and_return nil
+    @expander.should_receive(:expand_to_ids).with('').and_return nil
     @command.should_receive(:puts).with 'nothing to shuffle - please search for some tracks'
 
     @command.execute
@@ -33,7 +33,7 @@ describe Songbirdsh::Command::Shuffle do
   it 'should shuffle the player matches (results from the last search)' do
     matches = [1,2,3]
 
-    @expander.should_receive(:expand).with('').and_return []
+    @expander.should_receive(:expand_to_ids).with('').and_return []
     @player.should_receive(:matches).and_return matches
     should_randomise_values matches
 
@@ -43,7 +43,7 @@ describe Songbirdsh::Command::Shuffle do
   it 'should expand and shuffle any arguments' do
     values = [1,2,3]
 
-    @expander.should_receive(:expand).with('some text').and_return values
+    @expander.should_receive(:expand_to_ids).with('some text').and_return values
     should_randomise_values values
 
     @command.execute 'some text'

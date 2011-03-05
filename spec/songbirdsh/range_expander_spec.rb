@@ -14,11 +14,15 @@ describe Songbirdsh::RangeExpander do
     @expander.expand("123 \t 456  , 789 ").should == [1371, 5370, 9369]
   end
 
-  it 'should enqueue a fully specified range of tracks' do
+  it 'should expand a fully specified range' do
     @expander.expand(" 456-45i ").should == (5370..5382).to_a
   end
 
-  it 'should enqueue an abbreviated range of tracks' do
+  it 'should expand an abbreviated range' do
     @expander.expand(" 456-i ").should == (5370..5382).to_a
+  end
+
+  it 'should expand ids for a range' do
+    @expander.expand_to_ids(" s-z ").should == %w{s t u v w x y z}
   end
 end
