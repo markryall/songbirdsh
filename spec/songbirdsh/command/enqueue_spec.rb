@@ -1,4 +1,4 @@
-require File.dirname(__FILE__)+'/../../spec_helper'
+require_relative '../../spec_helper'
 require 'songbirdsh/command/enqueue'
 
 describe Songbirdsh::Command::Enqueue do

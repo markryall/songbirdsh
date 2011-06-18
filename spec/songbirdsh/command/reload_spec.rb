@@ -1,4 +1,4 @@
-require File.dirname(__FILE__)+'/../../spec_helper'
+require_relative '../../spec_helper'
 require 'songbirdsh/command/reload'
 
 describe Songbirdsh::Command::Reload do
