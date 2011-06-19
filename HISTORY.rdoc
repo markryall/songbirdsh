@@ -1,3 +1,18 @@
+= 0.0.5
+
+Bug fixes, code cleanup and some colour
+
+* Sorted out crash when listing queue while not playing
+* Added help to all commands
+* Added rainbow and added colour to the track display
+* Changed shuffle behaviour - it now just shuffles current queue
+* Added flush command
+* Switched to using bundler to manage gem
+
+= 0.0.4
+
+Some minor bug fixes
+
 = 0.0.3
 
 Introduced testing, lastfm support and a few other useful commands
