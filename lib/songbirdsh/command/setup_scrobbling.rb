@@ -1,6 +1,7 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::SetupScrobbling < Songbirdsh::Command
+class Songbirdsh::Command::SetupScrobbling
+  include Songbirdsh::Command
   def execute text
     @player.scrobbler.setup
   end

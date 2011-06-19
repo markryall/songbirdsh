@@ -1,6 +1,7 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Search < Songbirdsh::Command
+class Songbirdsh::Command::Search
+  include Songbirdsh::Command
   def execute text
     terms = text.split(/\W/)
     matches = []

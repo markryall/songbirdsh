@@ -1,6 +1,8 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Shuffle < Songbirdsh::Command
+class Songbirdsh::Command::Shuffle
+  include Songbirdsh::Command
+
   def execute *args
     ids = []
     while id = @player.dequeue

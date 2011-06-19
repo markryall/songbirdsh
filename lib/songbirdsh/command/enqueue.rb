@@ -2,7 +2,9 @@ require 'yaml'
 require 'songbirdsh/range_expander'
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Enqueue < Songbirdsh::Command
+class Songbirdsh::Command::Enqueue
+  include Songbirdsh::Command
+
   def execute text
     @expander ||= Songbirdsh::RangeExpander.new
     @expander.expand(text).each {|id| @player.enqueue id }

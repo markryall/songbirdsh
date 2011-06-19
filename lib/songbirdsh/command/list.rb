@@ -1,6 +1,8 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::List < Songbirdsh::Command
+class Songbirdsh::Command::List
+  include Songbirdsh::Command
+
   def execute text
     @terms = text.split(/\W/)
     current = @player.current

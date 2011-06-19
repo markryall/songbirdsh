@@ -1,5 +1,9 @@
 module Songbirdsh
-  class Command
+  module Command
+    def self.included cls
+      cls.extend ClassMethods
+    end
+
     def self.load name, *args
       require "songbirdsh/command/#{name}"
       classname = name.to_s.split('_').map{|s|s.capitalize}.join
@@ -8,6 +12,20 @@ module Songbirdsh
 
     def initialize player
       @player = player
+    end
+
+    module ClassMethods
+      def usage usage
+        define_method(:usage) { usage }
+      end
+
+      def help help
+        define_method(:help) { help }
+      end
+
+      def execute &block
+        define_method :execute, block
+      end
     end
   end
 end
