@@ -1,5 +1,4 @@
 require 'songbirdsh/command'
-require 'songbirdsh/range_expander'
 
 class Songbirdsh::Command::Shuffle < Songbirdsh::Command
   def execute *args
