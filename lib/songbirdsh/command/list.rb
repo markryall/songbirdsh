@@ -1,7 +1,9 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::List < Songbirdsh::Command
-  def execute text
+class Songbirdsh::Command::List
+  include Songbirdsh::Command
+  help 'lists the contents of the track queue (and approximate times for when each track will be played)'
+  execute do |text|
     @terms = text.split(/\W/)
     current = @player.current
     next_start_time = Time.at current.started
@@ -16,9 +18,5 @@ class Songbirdsh::Command::List < Songbirdsh::Command
   def show time, track
     return unless @terms.empty? or @terms.all? {|term| track.search_string.include? term }
     puts "#{time}\n\t#{track}"
-  end
-
-  def help
-    'lists the contents of the track queue (and approximate times for when each track will be played)'
   end
 end

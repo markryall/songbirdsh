@@ -1,6 +1,7 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Scrobbling < Songbirdsh::Command
+class Songbirdsh::Command::Scrobbling
+  include Songbirdsh::Command
   def execute text
     scrobbling = (text == 'on')
     return if @player.scrobbling == scrobbling

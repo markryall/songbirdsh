@@ -1,6 +1,8 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Recent < Songbirdsh::Command
+class Songbirdsh::Command::Recent
+  include Songbirdsh::Command
+
   def execute text=nil
     @player.library.reload unless @player.library.tracks
     maximum, current_album, tracks, total_count = text.to_i, nil, [], 0

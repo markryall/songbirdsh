@@ -1,6 +1,7 @@
 require 'songbirdsh/command'
 
-class Songbirdsh::Command::Start < Songbirdsh::Command
+class Songbirdsh::Command::Start
+  include Songbirdsh::Command
   def execute ignored=nil
     @player.start
   end
