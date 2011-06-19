@@ -1,12 +1,11 @@
-require 'songbirdsh/queue'
-require 'songbirdsh/library'
-
 require 'cgi'
 require 'yaml'
 require 'fileutils'
 require 'splat'
 
+require 'songbirdsh/queue'
 require 'songbirdsh/scrobbler'
+require 'songbirdsh/library'
 
 module Songbirdsh
   class Player
@@ -32,7 +31,7 @@ module Songbirdsh
     end
 
     def current 
-      YAML.load(File.read('current_song'))
+      File.exist?('current_song') ? YAML.load_file('current_song') : nil
     end
 
     def register track
