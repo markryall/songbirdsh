@@ -14,9 +14,9 @@ EOF
   spec.add_dependency 'splat', '~>0'
   spec.add_dependency 'shell_shock', '~>0'
   spec.add_dependency 'sequel', '~> 3'
-  spec.add_dependency 'splat', '~> 0.1'
   spec.add_dependency 'sqlite3', '~> 1'
   spec.add_dependency 'simple_scrobbler', '~> 0'
+  spec.add_dependency 'rainbow', '~> 1'
 
   spec.add_development_dependency 'rake', '~>0.8'
   spec.add_development_dependency 'rspec', '~>2'

@@ -1,3 +1,5 @@
+require 'rainbow'
+
 module Songbirdsh
   class Track
     attr_accessor *%w{id track album artist duration genre number year disc disc_total track_total label started}
@@ -23,7 +25,11 @@ module Songbirdsh
     end
 
     def to_s
-      "#{self.search_id}: #{self.artist} - #{self.album} - #{self.number} #{self.track} (#{self.duration})"
+      "#{my(:search_id,:white)}: #{my(:artist, :yellow)} - #{my(:album,:cyan)} - #{my(:number,:magenta)} #{my(:track,:green)} (#{my(:duration,:white)})"
+    end
+
+    def my field, colour
+      self.send(field).to_s.foreground(colour)
     end
   end
 end

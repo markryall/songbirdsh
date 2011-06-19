@@ -2,17 +2,18 @@ PATH
   remote: .
   specs:
     songbirdsh (0.0.5)
+      rainbow (~> 1)
       sequel (~> 3)
       shell_shock (~> 0)
       simple_scrobbler (~> 0)
       splat (~> 0)
-      splat (~> 0.1)
       sqlite3 (~> 1)
 
 GEM
   remote: http://rubygems.org/
   specs:
     diff-lcs (1.1.2)
+    rainbow (1.1.1)
     rake (0.8.7)
     rspec (2.5.0)
       rspec-core (~> 2.5.0)
