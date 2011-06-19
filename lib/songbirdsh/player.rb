@@ -19,14 +19,18 @@ module Songbirdsh
       @library = Library.new preferences
     end
 
+    def c text,colour
+      text.to_s.foreground colour
+    end
+
     def status
       if @pid
         track = self.current
-        puts "Since #{Time.at(track.started)}\n\t#{track}"
+        puts "Since #{c Time.at(track.started), :cyan}\n\t#{track}"
         played = Time.now.to_i-track.started
-        puts "#{played} seconds (#{track.duration-played} remaining)"
+        puts "#{c played, :yellow} seconds (#{c track.duration-played, :yellow} remaining)"
       else
-        puts 'not playing'
+        puts 'not playing'.foreground(:yellow)
       end
     end
 

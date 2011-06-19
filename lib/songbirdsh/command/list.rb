@@ -19,6 +19,6 @@ class Songbirdsh::Command::List
 
   def show time, track
     return unless @terms.empty? or @terms.all? {|term| track.search_string.include? term }
-    puts time ? "#{time}\n\t#{track}" : track
+    puts time ? "#{time.to_s.foreground(:blue)}\n\t#{track}" : track
   end
 end
