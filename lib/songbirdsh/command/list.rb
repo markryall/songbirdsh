@@ -2,7 +2,12 @@ require 'songbirdsh/command'
 
 class Songbirdsh::Command::List
   include Songbirdsh::Command
-  help 'lists the contents of the track queue (and approximate times for when each track will be played)'
+  usage '*<word>'
+  help <<EOF
+lists the contents of the track queue
+these results can optionally be filtered by specified words
+when playing, approximate times for each track will be displayed
+EOF
   execute do |text|
     @terms = text.split(/\W/)
     current = @player.current
