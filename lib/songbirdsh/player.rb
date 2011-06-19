@@ -30,8 +30,8 @@ module Songbirdsh
       end
     end
 
-    def current 
-      File.exist?('current_song') ? YAML.load_file('current_song') : nil
+    def current
+      (@pid and File.exist?('current_song')) ? YAML.load_file('current_song') : nil
     end
 
     def register track

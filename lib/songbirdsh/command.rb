@@ -1,5 +1,7 @@
 module Songbirdsh
   module Command
+    attr_reader :usage, :help
+
     def self.included cls
       cls.extend ClassMethods
     end
@@ -12,6 +14,8 @@ module Songbirdsh
 
     def initialize player
       @player = player
+      @usage = ''
+      @help = ''
     end
 
     module ClassMethods

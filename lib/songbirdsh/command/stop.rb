@@ -2,8 +2,6 @@ require 'songbirdsh/command'
 
 class Songbirdsh::Command::Stop
   include Songbirdsh::Command
-
-  def execute ignored=nil
-    @player.stop
-  end
+  help 'stops the player'
+  execute {|ignored| @player.stop }
 end
