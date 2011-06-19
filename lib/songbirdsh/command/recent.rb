@@ -2,8 +2,9 @@ require 'songbirdsh/command'
 
 class Songbirdsh::Command::Recent
   include Songbirdsh::Command
-
-  def execute text=nil
+  usage '<count>'
+  help 'lists the specified number of recently added albums'
+  execute do |text|
     @player.library.reload unless @player.library.tracks
     maximum, current_album, tracks, total_count = text.to_i, nil, [], 0
     @player.library.tracks.reverse.each do |track|
