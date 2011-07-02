@@ -1,2 +1,8 @@
 name
 current_track should be ignored when the player hasn't been started
+<----->
+release
+0.0.5
+<----->
+status
+completed

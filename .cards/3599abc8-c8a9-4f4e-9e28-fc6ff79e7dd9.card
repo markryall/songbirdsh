@@ -1,2 +1,8 @@
 name
 allow complex ranges to be used to enqueue tracks (ie. scd-d1)
+<----->
+release
+0.0.5
+<----->
+status
+completed
