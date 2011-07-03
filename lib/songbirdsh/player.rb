@@ -54,15 +54,15 @@ module Songbirdsh
           Process.kill 'TERM', player_pid if player_pid
           exit
         end
-        total_tracks = @library.with_db {|db| db[:media_items].count }
+        total_tracks = @library.count
         loop do
           id = dequeue || (rand * total_tracks).to_i
-          row = @library.with_db {|db| db[:media_items][:media_item_id=>id] }
+          row = @library.row id
           unless row
             puts "track with id #{id} did not exist"
             next
           end
-          path = CGI.unescape(row[:content_url].slice(7..-1)) if row[:content_url] =~ /^file/
+          path = @library.path row
           unless path and File.exist? path
             puts "track with id #{id} did not refer to a file"
             next

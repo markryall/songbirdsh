@@ -3,6 +3,7 @@ require 'rainbow'
 module Songbirdsh
   class Track
     attr_accessor *%w{id track album artist duration genre number year disc disc_total track_total label started}
+    attr_accessor *%w{path timestamp title time date albumartist puid mbartistid mbalbumid mbalbumartistid asin}
 
     def initialize id
       @id = id
@@ -21,11 +22,11 @@ module Songbirdsh
     end
 
     def search_string
-      "#{self.artist}#{self.album}#{self.track}"
+      "#{self.artist.downcase}#{self.album.downcase}#{self.title.downcase}"
     end
 
     def to_s
-      "#{my(:search_id,:white)}: #{my(:artist, :yellow)} - #{my(:album,:cyan)} - #{my(:number,:magenta)} #{my(:track,:green)} (#{my(:duration,:white)})"
+      "#{my(:search_id,:white)}: #{my(:artist, :yellow)} - #{my(:album,:cyan)} - #{my(:track,:magenta)} #{my(:title,:green)} (#{my(:time,:white)})"
     end
 
     def my field, colour
