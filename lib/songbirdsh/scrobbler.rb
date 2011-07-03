@@ -62,12 +62,12 @@ module Songbirdsh
 private
     def send_to_scrobbler message, track
       begin
-        debug %w{artist track duration album number}.map {|k| "#{k}=#{track.send(k)}"}.join(',')
+        debug %w{artist title time album track}.map {|k| "#{k}=#{track.send(k)}"}.join(',')
         @scrobbler.send message, track.artist,
-          track.track,
-          :length => track.duration,
+          track.title,
+          :length => track.time,
           :album => track.album,
-          :track_number => track.number
+          :track_number => track.track
       rescue Exception => e
         puts "Failed to scrobble: #{e}"
       end

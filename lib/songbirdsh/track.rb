@@ -2,8 +2,8 @@ require 'rainbow'
 
 module Songbirdsh
   class Track
-    attr_accessor *%w{id track album artist duration genre number year disc disc_total track_total label started}
-    attr_accessor *%w{path timestamp title time date albumartist puid mbartistid mbalbumid mbalbumartistid asin}
+    attr_accessor *%w{id started}
+    attr_accessor *%w{path album artist track timestamp title time date albumartist puid mbartistid mbalbumid mbalbumartistid asin}
 
     def initialize id
       @id = id
@@ -19,6 +19,9 @@ module Songbirdsh
 
     def search_id
       id.to_s 36
+    end
+
+    def duration
     end
 
     def search_string

@@ -29,7 +29,7 @@ module Songbirdsh
         track = self.current
         puts "Since #{c Time.at(track.started), :cyan}\n\t#{track}"
         played = Time.now.to_i-track.started
-        puts "#{c played, :yellow} seconds (#{c track.duration-played, :yellow} remaining)"
+        puts "#{c played, :yellow} seconds (#{c track.time.to_i-played, :yellow} remaining)" if track.time
       else
         puts 'not playing'.foreground(:yellow)
       end
