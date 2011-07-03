@@ -17,6 +17,7 @@ module Songbirdsh
       @scrobbler = Scrobbler.new preferences
       @scrobbling = true
       @library = Library.new preferences
+      @library.reload
     end
 
     def c text,colour
