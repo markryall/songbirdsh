@@ -22,7 +22,7 @@ module Songbirdsh
     end
 
     def search_string
-      "#{self.artist.downcase}#{self.album.downcase}#{self.title.downcase}"
+      "#{self.artist.to_s.downcase}#{self.album.to_s.downcase}#{self.title.to_s.downcase}"
     end
 
     def to_s
